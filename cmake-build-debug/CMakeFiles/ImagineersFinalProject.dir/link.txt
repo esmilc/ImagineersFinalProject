@@ -1,0 +1,3 @@
+"C:\Program Files\JetBrains\CLion 2024.2.2\bin\cmake\win\x64\bin\cmake.exe" -E rm -f CMakeFiles\ImagineersFinalProject.dir/objects.a
+C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\ar.exe qc CMakeFiles\ImagineersFinalProject.dir/objects.a @CMakeFiles\ImagineersFinalProject.dir\objects1.rsp
+C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\G__~1.EXE -g -Wl,--whole-archive CMakeFiles\ImagineersFinalProject.dir/objects.a -Wl,--no-whole-archive -o ImagineersFinalProject.exe -Wl,--out-implib,libImagineersFinalProject.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\ImagineersFinalProject.dir\linkLibs.rsp
