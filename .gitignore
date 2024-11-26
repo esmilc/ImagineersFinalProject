@@ -1,3 +1,5 @@
+!wait_time_data/*.csv #We do not want to ignore the CSV files
+
 # Prerequisites
 *.d
 
