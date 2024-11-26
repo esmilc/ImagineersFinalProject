@@ -30,6 +30,10 @@
 *.exe
 *.out
 *.app
+main
+
+# Debugging files (macOS)
+*.dSYM
 
 # Build directories
 build/
@@ -41,8 +45,6 @@ Release/
 cmake-build-debug/
 cmake-build-release/
 cmake-build-*/
-build/
-
 
 # CLion-specific files
 .idea/
@@ -50,14 +52,8 @@ build/
 *.iws
 *.ipr
 *.icls
-*.sln
-*.suo
-*.user
-*.ncb
-*.sdf
-*.vcxproj
-*.vcxproj.filters
-*.vcxproj.user
+
+# Visual Studio/CLion generated files
 *.sln
 *.suo
 *.user
@@ -68,19 +64,10 @@ build/
 *.vcxproj.filters
 *.vcxproj.user
 
-#Gitignore for VSCODE
-.vscode/*
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
-!.vscode/extensions.json
-!.vscode/*.code-snippets
-
-# Local History for Visual Studio Code
-.history/
-
-# Built Visual Studio Code Extensions
-*.vsix
+# Visual Studio Code
+.vscode/
+.history/  # Local history for VSCode
+*.vsix     # Built Visual Studio Code Extensions
 
 # Operating system files
 .DS_Store
