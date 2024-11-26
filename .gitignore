@@ -81,3 +81,7 @@ build/
 
 # Built Visual Studio Code Extensions
 *.vsix
+
+# Operating system files
+.DS_Store
+Thumbs.db
