@@ -30,3 +30,40 @@
 *.exe
 *.out
 *.app
+
+# Build directories
+build/
+bin/
+Debug/
+Release/
+
+# CMake build directories
+cmake-build-debug/
+cmake-build-release/
+cmake-build-*/
+build/
+
+# CLion-specific files
+.idea/
+*.iml
+*.iws
+*.ipr
+*.icls
+*.sln
+*.suo
+*.user
+*.ncb
+*.sdf
+*.vcxproj
+*.vcxproj.filters
+*.vcxproj.user
+*.sln
+*.suo
+*.user
+*.ncb
+*.sdf
+*.opensdf
+*.vcxproj
+*.vcxproj.filters
+*.vcxproj.user
+
