@@ -10,6 +10,5 @@ MINHEAP:
     
 
 Features to [POSSIBLY] add:
-    - Ask for a time of arrival at park
-        -Ask for departure time???
+    -Ask for departure time
     -Maybe user validation when user inputs what date, i check if its length 2 but not if theyre both numbers

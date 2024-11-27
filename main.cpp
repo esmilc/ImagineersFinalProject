@@ -43,6 +43,43 @@ map<string, string> rideMap = { //key is user friendly value is file name
     {"Winnie The Pooh", "winnie_the_pooh.csv"}
 };
 
+string rideKeys[] = {
+    "Aladdin",
+    "Astro Orbiter",
+    "Barnstormer",
+    "Big Thunder Mountain",
+    "Buzz Lightyear",
+    "Carousel Of Progress",
+    "Dumbo",
+    "Enchanted Tales With Belle",
+    "Haunted Mansion",
+    "Jungle Cruise",
+    "Laugh Floor",
+    "Little Mermaid",
+    "Mad Tea Party",
+    "Meet Ariel",
+    "Meet Cinderella",
+    "Meet Daring Disney Pals",
+    "Meet Dashing Disney Pals",
+    "Meet Mickey",
+    "Meet Princess Tiana",
+    "Mickeys Philharmagic",
+    "Peoplemover",
+    "Peter Pan",
+    "Pirates Of The Caribbean",
+    "Prince Charming Carousel",
+    "Railroad Fantasy Land",
+    "Railroad Frontier Land",
+    "Railroad Main Street Usa",
+    "Small World",
+    "Space Mountain",
+    "Swiss Family Treehouse",
+    "Tiki Room",
+    "Tomorrowland Speedway",
+    "Tron Light Cycle",
+    "Winnie The Pooh"
+};
+
 // string daysInMonth[32] = { //Converts numeric date to date of month for 03/23
 //     "NOT A DAY(0)","Wednesday", "Thursday", "Friday", "Saturday", "Sunday",
 //     "Monday", "Tuesday", "Wednesday", "Thursday", "Friday",
@@ -59,29 +96,24 @@ map<string, string> rideMap = { //key is user friendly value is file name
 
 int main() {
 
-    MinHeap heap;
+    MinHeap heap; //Creation of heap
 
-    cout << "Hello Imagineers!" << endl;
-    cout << "Testing Functionality" << endl;
+    // cout << "Hello Imagineers!" << endl;
+    // cout << "Testing Functionality" << endl;
 
 
-    vector<string> filesToParse = printWelcomeMessage(rideMap);
+    pair<int, vector<string>> filesToParsePair = printWelcomeMessage(rideMap, rideKeys); //This will take in the user inputs for the arrival time and vector of rides they will ride
 
-    string date = getDate();
+    string date = getDate(); //This is responsible for grabbing date that user will ride
 
     cout << "Working to make your perfect day..." << endl;
 
-    int numRides = 0;
-
-    for (const auto & i : filesToParse) {
+    int numRides = 0; //Backend: This is for me to be able to continue grabbing from min heap until all rides
+    for (const auto & i : filesToParsePair.second) { //This is the logic for grabbing correct files and parsing through them.
         parseFileInHeap(i, date, heap);
         numRides ++;
     }
-
-    printSequence(heap, numRides);
-
-
-
+    printSequenceUsingMinHeap(heap, numRides, filesToParsePair.first); //This is the logic for grabbing the sequence
 
     return 0;
 }

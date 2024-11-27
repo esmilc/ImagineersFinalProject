@@ -9,9 +9,10 @@ using namespace std;
 
 
 
-void printSequence(MinHeap heap, int numRides) {
-    int currentTime = 540; //Park opens at 9:00 AM
-    int counter = 0;
+void printSequenceUsingMinHeap(MinHeap heap, int numRides, int startTime) {
+    //The purpose of this function is to go through the min heap and print out all of the rides to ride.
+    int currentTime = startTime; //Park opens at 9:00 AM
+    int counter = 1;
     unordered_set<string> ridesAdded;
     while (ridesAdded.size() != numRides) {
         HeapNode currNode = heap.pop();
@@ -23,10 +24,6 @@ void printSequence(MinHeap heap, int numRides) {
             currentTime = currNode.time + 6 + currNode.waitTime;
         }
     }
-
-
-
-
 }
 
 
