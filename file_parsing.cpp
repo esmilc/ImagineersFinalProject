@@ -18,7 +18,7 @@ int rawTimetoFormatted(string sTime){
 }
 
 bool parseFile(string filename, string date){ //I have the prefix, FOLDER NAME CANNOT CHANGE
-    string prefix = "rides_wait_time/";
+    string prefix = "../rides_wait_time/";
     string path = prefix + filename;
     ifstream file(path);
 
