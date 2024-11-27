@@ -9,7 +9,7 @@ int main() {
 
     cout << rawTimetoFormatted("09:03:15") << endl;
 
-    parseFile("meet mickey.csv", "1");
+    parseFile("meet_mickey.csv", "1");
 
     return 0;
 }
