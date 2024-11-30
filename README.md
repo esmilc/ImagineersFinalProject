@@ -7,6 +7,7 @@ MINHEAP:
     we could possibly use a minheap
     minHeap is organized by start time, but if 2 are equal chooses the one with lowest wait time
     my implementation could be considered a greedy algorithm
+    [REMINDER] I need to add a timer to time the algorithm
     
 
 Features to [POSSIBLY] add:
