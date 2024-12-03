@@ -1,4 +1,4 @@
-***GOOGLE DOC [https://docs.google.com/document/d/1UR1jg0T43JRUKLzi-7ksjq3B-G1a5Iky4tBEZmHAWIY/edit?usp=sharing]***
+***Report: [https://docs.google.com/document/d/1UR1jg0T43JRUKLzi-7ksjq3B-G1a5Iky4tBEZmHAWIY/edit?usp=sharing]***
 
 1. For all of the rides, the wait timas are for the month of March 2023. 
 2. We are going to make this application for someone who's going to travel in March, the busiest month for Disney
