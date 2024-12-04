@@ -1,12 +1,14 @@
 
 #include <string>
 #include "heap.h"
+#include "BPlusTree.h"
 using namespace std;
 
 
 int rawTimetoFormatted(string sTime);
 string minutesToStandard(int input);
 bool parseFileInHeap(string filename, string date, MinHeap& heap);
+bool parseFileInTree(string filename, string date, BPlusTree& tree);
 
 /*
 

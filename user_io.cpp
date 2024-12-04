@@ -1,13 +1,10 @@
-//
-// Created by Esmil Canet on 11/26/24.
-//
+
 
 #include <iostream>
 #include <map>
 #include <set>
 #include <utility>
 #include "user_io.h"
-
 using namespace std;
 
 int rawTimetoFormattedValidation(string sTime){
@@ -75,7 +72,7 @@ int getArrivalTime() {
     //in a loop until the user inputs DONE, at that point the function will return a vector of
     //strings with NO DUPLICATES with the files to sort.
 
-    cout << "Plan you ideal Magic Kingdom Visit!" << endl;
+    cout << "Plan your ideal Magic Kingdom Visit!" << endl;
 
     cout << "What time do you plan on arriving? Enter as HH:MM (24hr).\nEnter hours between 09:00 and 21:00." << endl;;
     int arrivalTime = getArrivalTime();
@@ -106,8 +103,14 @@ int getArrivalTime() {
             cout << "INVALID INPUT...Remember to input numbers between 1 & 34" << endl;
         }
         else {
-            auto it = find(toReturnUser.begin(), toReturnUser.end(), rideMap[keys[input-1]]);
-            if (it == toReturnUser.end()) {
+            int x = 0;
+            while(x < toReturnUser.size()) {
+                if(toReturnUser[x] == rideMap[keys[input-1]]) {
+                    break;
+                }
+                x++;
+            }
+            if(x == toReturnUser.size()) {
                 toReturnUser.push_back(rideMap[keys[input-1]]);
             }
         }

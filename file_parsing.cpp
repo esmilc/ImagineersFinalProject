@@ -3,8 +3,10 @@
 #include <string>
 #include <fstream>
 #include <vector>
-#include "heap.cpp"
 using namespace std;
+
+#include "heap.cpp"
+#include "BPlusTree.h"
 
 
 int rawTimetoFormatted(string sTime){
@@ -70,6 +72,49 @@ bool parseFileInHeap(string filename, string date, MinHeap& heap){ //I have the 
             int time = rawTimetoFormatted(splitLine[1].substr(11,8));
             heap.push(splitLine[0],time, stoi(splitLine[2]));
 
+        }
+    }
+
+    return true;
+}
+
+bool parseFileInTree(string filename, string date, BPlusTree& tree){ //I have the prefix, FOLDER NAME CANNOT CHANGE
+    //The purpose of this funtion is to take in the file name, date the user inputted, and the heap and enter all of the
+    //ride information into the heap. return is irrelevant, it's just there to exit out of the function if the files is
+    //unable to open
+    string prefix = "../rides_wait_time/";
+    string path = prefix + filename;
+    ifstream file(path);
+
+    if (!file.is_open()){
+        cout << filename << " could not open properly bro!!" << endl;
+        cout << "Is the folder name still called: " << prefix << "?" << endl;
+        return false;
+    }
+
+    string line;
+    while (getline(file, line)){
+        istringstream ss(line);
+        string word;
+        string splitLine[3];
+        int index = 0;
+        bool isValid = true;
+
+        while (getline(ss, word, ',')) {
+            if (index == 1 && word.substr(0,10) != date) {
+                // cout << line << endl;
+                // cout << word.substr(0,10) << " does not match " << date << endl;
+                isValid = false;
+                break;
+            }
+            splitLine[index] = word;
+            index++;
+        }
+
+        if (isValid) {
+            int time = rawTimetoFormatted(splitLine[1].substr(11,8));
+            RideNode* newRide = new RideNode(splitLine[0], time, stoi(splitLine[2]));
+            tree.insert(tree.src, *newRide);
         }
     }
 

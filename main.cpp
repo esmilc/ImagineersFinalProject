@@ -1,9 +1,13 @@
 #include <iostream>
+#include <set>
+#include <vector>
+#include <unordered_map>
 using namespace std;
+
 #include "file_parsing.h"
+#include "BPlusTree.h"
 #include "heap.h"
 #include "user_io.h"
-#include <set>
 #include "build_sequence_heap.h"
 
 map<string, string> rideMap = { //key is user friendly value is file name
@@ -96,24 +100,40 @@ string rideKeys[] = {
 
 int main() {
 
-    MinHeap heap; //Creation of heap
-
-    // cout << "Hello Imagineers!" << endl;
-    // cout << "Testing Functionality" << endl;
-
-
     pair<int, vector<string>> filesToParsePair = printWelcomeMessage(rideMap, rideKeys); //This will take in the user inputs for the arrival time and vector of rides they will ride
 
     string date = getDate(); //This is responsible for grabbing date that user will ride
 
+    cout << "Type 1 for B+ Tree, 2 for MinHeap" << endl;
+
+    string struc;
+    cin >> struc;
+
     cout << "Working to make your perfect day..." << endl;
 
-    int numRides = 0; //Backend: This is for me to be able to continue grabbing from min heap until all rides
-    for (const auto & i : filesToParsePair.second) { //This is the logic for grabbing correct files and parsing through them.
-        parseFileInHeap(i, date, heap);
-        numRides ++;
+    if(struc == "1") {
+        unordered_map<string, BPlusTree*> rideTrees;
+        for(int x = 0; x < 34; x++) {
+            rideTrees[rideKeys[x]] = new BPlusTree(rideKeys[x]);
+            parseFileInTree(rideMap[rideKeys[x]], "2024-03-" + date, *rideTrees[rideKeys[x]]);
+        }
+
+        for(auto it = rideTrees.begin(); it != rideTrees.end(); ++it) {
+            cout << it->second->name << " numKeys: " << it->second->numKeys << endl;
+            // it->second->printList(it->second->src);
+            delete it->second;
+        }
     }
-    printSequenceUsingMinHeap(heap, numRides, filesToParsePair.first); //This is the logic for grabbing the sequence
+    else {
+        MinHeap heap; //Creation of heap
+
+        int numRides = 0; //Backend: This is for me to be able to continue grabbing from min heap until all rides
+        for (const auto & i : filesToParsePair.second) { //This is the logic for grabbing correct files and parsing through them.
+            parseFileInHeap(i, date, heap);
+            numRides ++;
+        }
+        printSequenceUsingMinHeap(heap, numRides, filesToParsePair.first); //This is the logic for grabbing the sequence
+    }
 
     return 0;
 }
