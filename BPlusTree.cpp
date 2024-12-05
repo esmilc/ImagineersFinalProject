@@ -16,7 +16,7 @@ RideNode::RideNode(string n, int t, int wt) {
     waitTime = wt;
 }
 
-bool RideNode::operator<(const RideNode& other) {
+bool RideNode::operator<(const RideNode& other) const {
     return time < other.time;
 }
 
@@ -28,6 +28,11 @@ Node::Node() = default;
 
 void Node::insert(RideNode ride) {
     data.push_back(ride);
+
+    int minTimeIndex = 0;
+
+    // sort the nodes based on the time
+
     sort(data.begin(), data.end());
     max = data[data.size() -1];
 }
@@ -166,7 +171,7 @@ void BPlusTree::splitNode(Node* node, Node* parent, int childIdx) {
     numNodes++;
 }
 
-int BPlusTree::search(Node *root, int target) {
+RideNode BPlusTree::search(Node *root, int target) {
     if(root->leaf) {
 
         int diff;
@@ -175,7 +180,7 @@ int BPlusTree::search(Node *root, int target) {
         for(int x = 0; x < root->data.size(); x++) {
             diff = abs(target - root->data[x].time);
             if(diff == 0) {
-                return root->data[x].waitTime;
+                return root->data[x];
             }
             if(closestIdx == -1 || diff < abs(target - root->data[closestIdx].time)) {
                 closestIdx = x;
@@ -196,7 +201,7 @@ int BPlusTree::search(Node *root, int target) {
 
             diff = abs(target - next[x].time);
             if(diff == 0) {
-                return next[x].waitTime;
+                return next[x];
             }
             if(closestIdxNext == -1 || diff < abs(target - next[closestIdxNext].time)) {
                 closestIdxNext = x;
@@ -207,7 +212,7 @@ int BPlusTree::search(Node *root, int target) {
 
             diff = abs(target - prev[x].time);
             if(diff == 0) {
-                return prev[x].waitTime;
+                return prev[x];
             }
             if(closestIdxPrev == -1 || diff < abs(target - prev[closestIdxPrev].time)) {
                 closestIdxPrev = x;
@@ -225,12 +230,12 @@ int BPlusTree::search(Node *root, int target) {
             abs(target - prev[closestIdxPrev].time);
 
         if(diffBase < diffNext && diffBase < diffPrev) {
-            return root->data[closestIdx].waitTime;
+            return root->data[closestIdx];
         }
         if(diffNext < diffBase && diffNext < diffPrev) {
-            return next[closestIdxNext].waitTime;
+            return next[closestIdxNext];
         }
-        return prev[closestIdxPrev].waitTime;
+        return prev[closestIdxPrev];
     }
 
     for(int x = 0; x < root->data.size(); x++) {
@@ -290,7 +295,7 @@ void BPlusTree::printRevList(Node *root) {
         Node* traverse = root;
         while(traverse != nullptr) {
             for(int x = traverse->data.size() - 1; x >= 0; x--) {
-               traverse->data[x].print();
+                traverse->data[x].print();
             }
             traverse = traverse->prev;
         }

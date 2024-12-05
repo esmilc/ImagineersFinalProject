@@ -15,7 +15,7 @@ struct RideNode {
     RideNode();
     RideNode(string n, int t, int wt);
 
-    bool operator<(const RideNode& other);
+    bool operator<(const RideNode& other) const;
     void print();
 };
 
@@ -52,7 +52,7 @@ struct BPlusTree {
     void insert(Node* root, RideNode& ride, int childIdx = 0, Node* parent = nullptr);
     void splitNode(Node* node, Node* parent, int childIdx);
 
-    int search(Node* root, int targetTime);
+    RideNode search(Node* root, int targetTime);
 
     void printInorder(Node* root, int level = 0);
     void printList(Node* root);
