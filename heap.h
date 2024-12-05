@@ -25,16 +25,16 @@ private:
     vector<HeapNode> heap;
 
 
-    void swap(int i, int j);
-    void heapifyDown();
-    void heapifyUp();
+    void swap(int i, int j); // O(1)
+    void heapifyDown(); // O (log n)
+    void heapifyUp(); // O(log n)
 
 public:
-    void push(string rideName, int time, int waitTime);
-    HeapNode pop();
-    HeapNode top();
-    bool isEmpty();
-    int sizeDEBUG();
+    void push(string rideName, int time, int waitTime); // O (log n)
+    HeapNode pop(); // O(log n)
+    HeapNode top(); // O (log n)
+    bool isEmpty(); // O (1)
+    int sizeDEBUG(); // O (1)
 };
 
 #endif // HEAP_H

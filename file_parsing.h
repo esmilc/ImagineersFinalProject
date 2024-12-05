@@ -5,10 +5,10 @@
 using namespace std;
 
 
-int rawTimetoFormatted(string sTime);
-string minutesToStandard(int input);
-bool parseFileInHeap(string filename, string date, MinHeap& heap);
-bool parseFileInTree(string filename, string date, BPlusTree& tree);
+int rawTimetoFormatted(string sTime); // O(1)
+string minutesToStandard(int input); // O(1)
+bool parseFileInHeap(string filename, string date, MinHeap& heap); // O(n log k) n is num lines in file, k is num of rides inserted into the min heap
+bool parseFileInTree(string filename, string date, BPlusTree& tree);//
 
 /*
 
