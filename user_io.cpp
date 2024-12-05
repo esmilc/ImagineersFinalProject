@@ -125,7 +125,8 @@ string getDate() {
     cout << "Please enter date that you are going to be visiting Disney! (Must be a 2 digit number between 1-31): " << endl;
     string input = getInputInitial();
     while (input.length() != 2) { // this makes sure input is 2 in length..more like forces it l0l
-        cout << "WARNING: Bruv, input has to be 2 numbers init" << endl;
+        // cout << "WARNING: Bruv, input has to be 2 numbers init" << endl;
+        cout << "WARNING: Input has to be 2 numbers init" << endl;
         input = getInputInitial();
     }
     return input;

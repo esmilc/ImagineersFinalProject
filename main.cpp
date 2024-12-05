@@ -137,7 +137,8 @@ int main() {
 
     string date = getDate(); //This is responsible for grabbing date that user will ride
 
-    cout << "Type 1 for B+ Tree, 2 for MinHeap" << endl;
+    cout << "In order to make your perfect day, we need to know how you want us to compile all of the info!" << endl;
+    cout << "Please type 1 for B+ Tree or 2 for MinHeap!" << endl;
 
     string struc;
     cin >> struc;
