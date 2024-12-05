@@ -2,8 +2,8 @@
 #include <set>
 #include <vector>
 #include <unordered_map>
+#include <chrono>
 using namespace std;
-#include <ctime>
 
 #include "file_parsing.h"
 #include "BPlusTree.h"
@@ -120,65 +120,77 @@ void scheduleUsingTree(int numRides, int arrivalTime, unordered_map<string, BPlu
 
         times.emplace_back(minNode, time);
         rode.insert(minNode.name);
-        time += min + 5;
+        time += min + 6;
         count++;
         if(time > 1260 || count == numRides) {
             break;
         }
     }
 
+    int x = 1;
     for(const auto& r : times) {
-        cout << r.first.name << " at " << minutesToStandard(r.second) << " (wait time of " << r.first.waitTime << " mins)" << endl;
+        cout << x << ". " << r.first.name << " at " << minutesToStandard(r.second) << " (wait time of " << r.first.waitTime << " mins)" << endl;
+        x++;
     }
 }
 
 int main() {
 
-    clock_t start, end;
-    double elapsedTime;
-
     pair<int, vector<string>> filesToParsePair = printWelcomeMessage(rideMap, rideKeys); //This will take in the user inputs for the arrival time and vector of rides they will ride
 
     string date = getDate(); //This is responsible for grabbing date that user will ride
 
-    cout << "In order to make your perfect day, we need to know how you want us to compile all of the info!" << endl;
-    cout << "Please type 1 for B+ Tree or 2 for MinHeap!" << endl;
+    // cout << "In order to make your perfect day, we need to know how you want us to compile all of the info!" << endl;
+    // cout << "Please type 1 for B+ Tree or 2 for MinHeap!" << endl;
+    //
+    // string struc;
+    // cin >> struc;
 
-    string struc;
-    cin >> struc;
+    cout << "Working to make your perfect day..." << endl << endl;
 
-    cout << "Working to make your perfect day..." << endl;
-    start = clock();
+    unordered_map<string, BPlusTree*> rideTrees;
 
-    if(struc == "1") {
-        unordered_map<string, BPlusTree*> rideTrees;
-
-        int numRides = 0; //Backend: This is for me to be able to continue grabbing from min heap until all rides
-        for (const auto & i : filesToParsePair.second) { //This is the logic for grabbing correct files and parsing through them.
-            rideTrees[i] = new BPlusTree(i);
-            parseFileInTree(i, "2024-03-" + date, *rideTrees[i]);
-            numRides++;
-        }
-        scheduleUsingTree(numRides, filesToParsePair.first, rideTrees);
-
-        for(auto x : rideTrees) {
-            delete x.second;
-        }
-    }
-    else {
-        MinHeap heap; //Creation of heap
-
-        int numRides = 0; //Backend: This is for me to be able to continue grabbing from min heap until all rides
-        for (const auto & i : filesToParsePair.second) { //This is the logic for grabbing correct files and parsing through them.
-            parseFileInHeap(i, date, heap);
-            numRides ++;
-        }
-        printSequenceUsingMinHeap(heap, numRides, filesToParsePair.first); //This is the logic for grabbing the sequence
+    int numRides = 0; //Backend: This is for me to be able to continue grabbing from min heap until all rides
+    for (const auto & i : filesToParsePair.second) { //This is the logic for grabbing correct files and parsing through them.
+        rideTrees[i] = new BPlusTree(i);
+        parseFileInTree(i, "2024-03-" + date, *rideTrees[i]);
+        numRides++;
     }
 
-    end = clock();
-    elapsedTime = double(end - start) / CLOCKS_PER_SEC;
-    cout << "\nGreat news, it only took us " << elapsedTime << " seconds to craft your iternarary!\nHave a great day!" << endl;
+    cout << "Schedule Using B+ Tree" << endl;
+    chrono::time_point<std::chrono::high_resolution_clock> start1 = chrono::high_resolution_clock::now();
+    scheduleUsingTree(numRides, filesToParsePair.first, rideTrees);
+    chrono::time_point<std::chrono::high_resolution_clock> end1 = chrono::high_resolution_clock::now();
+    chrono::duration<double> elapsed1 = end1 - start1;
+    cout << "Great news! It only took our B+ Tree method " << elapsed1.count() << " seconds to make your itinerary!" << endl;
+
+    for(auto x : rideTrees) {
+        delete x.second;
+    }
+    cout << endl << endl;
+
+
+    MinHeap heap; //Creation of heap
+
+    numRides = 0; //Backend: This is for me to be able to continue grabbing from min heap until all rides
+    for (const auto & i : filesToParsePair.second) { //This is the logic for grabbing correct files and parsing through them.
+        parseFileInHeap(i, "2024-03-" + date, heap);
+        numRides ++;
+    }
+
+    cout << "Schedule Using Heap" << endl;
+    chrono::time_point<std::chrono::high_resolution_clock> start2 = chrono::high_resolution_clock::now();
+    printSequenceUsingMinHeap(heap, numRides, filesToParsePair.first); //This is the logic for grabbing the sequence
+    chrono::time_point<std::chrono::high_resolution_clock> end2 = chrono::high_resolution_clock::now();
+    chrono::duration<double> elapsed2 = end2 - start2;
+    cout << "Great news! It only took our MinHeap method " << elapsed2.count() << " seconds to make your itinerary!" << endl;
+
+    // if(struc == "1") {
+    //
+    // }
+    // else {
+    //
+    // }
 
     return 0;
 }

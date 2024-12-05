@@ -75,8 +75,8 @@ using namespace std;
     }
 
     void MinHeap::push(string rideName, int time, int waitTime){
-        HeapNode node(rideName, time, waitTime);
-        heap.push_back(node);
+        HeapNode* node = new HeapNode(rideName, time, waitTime);
+        heap.push_back(*node);
         heapifyUp();
     }
 

@@ -14,7 +14,7 @@ void printSequenceUsingMinHeap(MinHeap heap, int numRides, int startTime) {
     int currentTime = startTime; //Park opens at 9:00 AM
     int counter = 1;
     unordered_set<string> ridesAdded;
-    while (ridesAdded.size() != numRides) {
+    while (ridesAdded.size() != numRides && currentTime < 1260) {
         HeapNode currNode = heap.pop();
         auto it = ridesAdded.find(currNode.name);
         if (it == ridesAdded.end() && currNode.time >= currentTime) {

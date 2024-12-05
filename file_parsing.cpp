@@ -1,3 +1,4 @@
+
 #include <iostream>
 #include <sstream>
 #include <string>
@@ -18,7 +19,7 @@ int rawTimetoFormatted(string sTime){
     string sMinute = sTime.substr(3, 2);
     int hour = stoi(sHour);
     int minute = stoi(sMinute);
-    
+
     return (hour*60) + (minute);
 }
 
@@ -59,7 +60,7 @@ bool parseFileInHeap(string filename, string date, MinHeap& heap){ //I have the 
         bool isValid = true;
 
         while (getline(ss, word, ',')) {
-            if (index == 1 && word.substr(8,2) != date) {
+            if (index == 1 && word.substr(0,10) != date) {
                 isValid = false;
                 break;
             }
@@ -102,8 +103,6 @@ bool parseFileInTree(string filename, string date, BPlusTree& tree){ //I have th
 
         while (getline(ss, word, ',')) {
             if (index == 1 && word.substr(0,10) != date) {
-                // cout << line << endl;
-                // cout << word.substr(0,10) << " does not match " << date << endl;
                 isValid = false;
                 break;
             }
