@@ -3,6 +3,7 @@
 #include <vector>
 #include <unordered_map>
 using namespace std;
+#include <ctime>
 
 #include "file_parsing.h"
 #include "BPlusTree.h"
@@ -133,6 +134,9 @@ void scheduleUsingTree(int numRides, int arrivalTime, unordered_map<string, BPlu
 
 int main() {
 
+    clock_t start, end;
+    double elapsedTime;
+
     pair<int, vector<string>> filesToParsePair = printWelcomeMessage(rideMap, rideKeys); //This will take in the user inputs for the arrival time and vector of rides they will ride
 
     string date = getDate(); //This is responsible for grabbing date that user will ride
@@ -144,6 +148,7 @@ int main() {
     cin >> struc;
 
     cout << "Working to make your perfect day..." << endl;
+    start = clock();
 
     if(struc == "1") {
         unordered_map<string, BPlusTree*> rideTrees;
@@ -170,6 +175,10 @@ int main() {
         }
         printSequenceUsingMinHeap(heap, numRides, filesToParsePair.first); //This is the logic for grabbing the sequence
     }
+
+    end = clock();
+    elapsedTime = double(end - start) / CLOCKS_PER_SEC;
+    cout << "\nGreat news, it only took us " << elapsedTime << " seconds to craft your iternarary!\nHave a great day!" << endl;
 
     return 0;
 }
