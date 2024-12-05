@@ -38,20 +38,33 @@ struct Node {
 // internal nodes can have at most 3 keys
 struct BPlusTree {
 
+    // holds ride name
     string name;
+
+    // tree invariants
     const static int n = 4;
     const static int l = 5;
+
+    // counters for nodes and keys
     int numNodes;
     int numKeys;
+
+    // root of the entire tree
     Node* src;
 
     BPlusTree(string name);
     ~BPlusTree();
+
+    // recursive function to help destructor
     void destructorHelp(Node* root);
 
     void insert(Node* root, RideNode& ride, int childIdx = 0, Node* parent = nullptr);
+
+    // splitter function for when a node breaks invariants
     void splitNode(Node* node, Node* parent, int childIdx);
 
+    // pass a time of day in minutes after midnight,
+    // returns RideNode with time closest to passed time
     RideNode search(Node* root, int targetTime);
 
     void printInorder(Node* root, int level = 0);

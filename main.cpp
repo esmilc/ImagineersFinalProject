@@ -140,12 +140,6 @@ int main() {
 
     string date = getDate(); //This is responsible for grabbing date that user will ride
 
-    // cout << "In order to make your perfect day, we need to know how you want us to compile all of the info!" << endl;
-    // cout << "Please type 1 for B+ Tree or 2 for MinHeap!" << endl;
-    //
-    // string struc;
-    // cin >> struc;
-
     cout << "Working to make your perfect day..." << endl << endl;
 
     unordered_map<string, BPlusTree*> rideTrees;
@@ -184,13 +178,6 @@ int main() {
     chrono::time_point<std::chrono::high_resolution_clock> end2 = chrono::high_resolution_clock::now();
     chrono::duration<double> elapsed2 = end2 - start2;
     cout << "Great news! It only took our MinHeap method " << elapsed2.count() << " seconds to make your itinerary!" << endl;
-
-    // if(struc == "1") {
-    //
-    // }
-    // else {
-    //
-    // }
 
     return 0;
 }
